@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewBag.Title = "Visitas";
+
+    var mensaje = (ViewBag.Mensaje == null) ? string.Empty : ViewBag.Mensaje;
+
+}
+
+@section css 
+{
+    <link href="~/Content/visitas.css" rel="stylesheet" />
+}
+
+
+@Html.Hidden("mensaje",(object)mensaje)
+
+    <ul class="ul-visitas">
+        <li class="header-list">Menu Visitas</li>
+        <li class="ul-visitas-li waves-effect"><a href="~/Visitas/pdh" class="collection-item">PDH CATALOGO <i class="material-icons">stars</i></a></li>
+        <li class="ul-visitas-divider"></li>
+        <li class="ul-visitas-li waves-effect"><a href="~/Visitas/PosibleNueva">PASO 1 Posible Nueva <i class="material-icons">stars</i></a></li>
+        <li class="ul-visitas-divider"></li>
+        <li class="ul-visitas-li waves-effect"><a href="~/Visitas/ListadoApoyo">PASO 2 Apoyo <i class="material-icons">stars</i></a></li>
+        <li class="ul-visitas-divider"></li>
+        <li class="ul-visitas-li waves-effect"><a href="~/Visitas/ListadoNuevas">PASO 3 Nuevas <i class="material-icons">stars</i></a></li>
+        <li class="ul-visitas-divider"></li>
+        <li class="ul-visitas-li waves-effect"><a href="~/Visitas/ListadoCobranza">PASO 4 Cobranza <i class="material-icons">stars</i></a></li>
+        <li class="ul-visitas-divider"></li>
+        <li class="ul-visitas-li waves-effect"><a href="~/Visitas/ListaMotivacion">PASO 5 Motivacion <i class="material-icons">stars</i></a></li>
+        <li class="ul-visitas-divider"></li>
+        <li class="ul-visitas-li waves-effect"><a href="~/Visitas/ListadoPosiblesReingresos">PASO 6 Posible Reingreso <i class="material-icons">stars</i></a></li>
+
+    </ul>
+
+
+@section scripts
+    {
+        
+        <script src="~/Scripts/Visitas.js"></script>
+
+    }
+
+
+
+

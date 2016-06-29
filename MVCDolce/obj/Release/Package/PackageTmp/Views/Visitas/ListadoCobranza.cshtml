@@ -1,0 +1,60 @@
+﻿@model MVCDolce.Models.ListaCobranza
+@{
+    ViewBag.Title = "Listado de Cobranza";
+
+    var xlista = ViewData["ListaCobranza"] as List<MVCDolce.Models.ListaCobranza>;
+    var total = (xlista == null) ? 0 : xlista.Count;
+
+    var mensaje = (ViewBag.mensaje == null) ? string.Empty : ViewBag.mensaje;
+    var error = (ViewBag.Error == null) ? string.Empty : ViewBag.Error;
+
+}
+
+@Html.Hidden("mensaje", (object)mensaje)
+@Html.Hidden("Mensaje_error", (object)error)
+
+<div class="container">
+    <table class="striped">
+        <thead>
+            <tr>
+                <th data-field="avatar">Avatar</th>
+                <th data-field="id">Documento</th>
+                <th data-field="name">Nombre de la Asesora</th>
+                <th data-field="telefono">Telefono</th>
+                <th data-field="campana">Campaña</th>
+                <th data-field="saldo">Saldo pendiente</th>
+                <th data-field="price">Seleccionar</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+
+            @if (xlista != null)
+            {
+                foreach (var item in xlista)
+                {
+                    <tr>
+                        <td style="text-align:center"><i class="material-icons">account_circle</i></td>
+                        <td>@item.StrDocumento</td>
+                        <td>@item.StrNombre</td>
+                        <td>@item.StrTelefono</td>
+                        <td>@item.StrCampaña</td>
+                        <td>$ @string.Format("{0:n0}",item.CurSaldo)</td>
+                        <td style="text-align:center"><a href="~/Visitas/Cobranza?strCedula=@item.StrDocumento&strNombre=@item.StrNombre&curSaldo=@item.CurSaldo&campana=@item.StrCampaña&puntos=@item.NumPuntos"><i class="material-icons">grade</i></a></td>
+                    </tr>
+                }
+            }
+
+        </tbody>
+    </table>
+
+    <div class="section">
+        <h3>Total de Asesoras <span>@total</span></h3>
+    </div>
+</div>
+
+@section scripts
+    {
+       <script src="~/Scripts/Visitas.js"></script>
+    }

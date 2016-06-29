@@ -1,0 +1,150 @@
+﻿
+@{
+    ViewBag.Title = "Informe de Visitas por Divisional";
+    var xcampanas = ViewData["Campanas"] as List<MVCDolce.Models.Campañas>;
+    var xZonas = ViewData["Zonas"] as List<MVCDolce.Models.Zonas>;
+
+    var xlistaVisitas = ViewData["ListaVisitas"] as List<MVCDolce.Models.InformeVisitas>;
+
+    var mensaje = (ViewBag.mensaje == null) ? string.Empty : ViewBag.mensaje;
+    var error = (ViewBag.Error == null) ? string.Empty : ViewBag.Error;
+
+    var total = (xlistaVisitas == null) ? 0 : xlistaVisitas.Count;
+}
+
+
+
+@section css
+    {
+        
+        <link href="~/Content/visitas.css" rel="stylesheet" />
+
+    }
+
+@Html.Hidden("mensaje", (object)mensaje)
+@Html.Hidden("Mensaje_error", (object)error)
+
+<div class="container">
+    
+    <h2>Consulta de Visitas</h2>
+
+    <form action="~/Visitas/InformeVisitasDivisional" method="post">
+
+        <div class="section">
+            <select id="select-campa" name="StrCampaña">
+                <option value="" disabled selected>Seleccione un Campaña</option>
+
+                @if (xcampanas != null)
+                {
+                    foreach (var item in xcampanas)
+                    {
+                        <option value="@item.StrCampaña">@item.StrCampaña</option>
+                    }
+
+                }
+            </select>
+            <label>Seleccione Una Campaña</label>
+        </div>
+
+        <div class="section">
+            <select id="select-zona" name="StrZona">
+                <option value="" disabled selected>Seleccione una Zona</option>
+                
+                @if (xZonas != null)
+                {
+                    foreach (var item in xZonas)
+                    {
+                       <option value="@item.StrZona">@item.StrZona</option>
+                    }
+                }
+
+            </select>
+        </div>
+
+        <button type="submit" class="waves-effect waves-light btn-large">Consultar</button>
+
+    </form>
+</div>
+
+<div class="container">
+    <table class="striped">
+        <thead>
+            <tr>
+                <th data-field="avatar">Avatar</th>
+                <th data-field="campana">Campaña</th>
+                <th data-field="division">Division</th>
+                <th data-field="zona">Zona</th>
+                <th data-field="documento">Documento No</th>
+                <th data-field="nombre">Nombre de la Asesora</th>
+                <th data-field="tipovisita">Visita</th>
+                <th data-field="observacion">Comentario</th>
+                <th data-field="pedido">Posee Pedido?</th>
+                <th data-field="fecha">Fecha de Visita</th>
+
+            </tr>
+        </thead>
+
+        <tbody>
+
+
+            @if (xlistaVisitas != null)
+            {
+                foreach (var item in xlistaVisitas)
+                {
+                    <tr>
+                        <td style="text-align:center"><i class="material-icons">account_circle</i></td>
+                        <td>@item.StrCampaña</td>
+                        <td>@item.StrDivision</td>
+                        <td>@item.StrZona</td>
+                        <td>@item.StrDocumento</td>
+                        <td>@item.StrNombre</td>
+                        <td>@item.StrTipoVisita</td>
+                        <td>@item.StrObservacion</td>
+                        <td>@item.LogPedido</td>
+                        <td>@item.DtmFecha</td>
+
+                    </tr>
+                }
+            }
+
+        </tbody>
+    </table>
+    <br />
+
+
+    <div class="section">
+        <ul class="totales-visitas">
+            <li class="li-totales-visitas">Total PDH Catalogo <span>@ViewBag.pdh</span></li>
+            <li class="divider"></li>
+            <li class="li-totales-visitas">Total Posibles Nuevas <span>@ViewBag.posiblenueva</span></li>
+            <li class="divider"></li>
+            <li class="li-totales-visitas">Total Apoyo <span>@ViewBag.apoyo</span></li>
+            <li class="divider"></li>
+            <li class="li-totales-visitas">Total Nuevas <span>@ViewBag.nueva</span></li>
+            <li class="divider"></li>
+            <li class="li-totales-visitas">Total Cobranza <span>@ViewBag.cobranza</span></li>
+            <li class="divider"></li>
+            <li class="li-totales-visitas">Total Motivacion <span>@ViewBag.motavacion</span> </li>
+            <li class="divider"></li>
+            <li class="li-totales-visitas">Total Posibles Reingresos <span>@ViewBag.posiblereingreso</span>  </li>
+        </ul>
+    </div>
+    <div class="section">
+        <h3>Total de Visitas <span>@total</span></h3>
+    </div>
+
+</div>
+
+
+@section scripts
+    {
+        
+        <script src="~/Scripts/Visitas.js"></script>
+
+        <script type="text/javascript">
+            $(function () {
+                $("#select-campa").material_select();
+                $("#select-zona").material_select();
+            });
+        </script>
+    }

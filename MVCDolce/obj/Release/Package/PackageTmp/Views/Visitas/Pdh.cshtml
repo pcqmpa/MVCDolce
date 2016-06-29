@@ -1,0 +1,57 @@
+﻿@model MVCDolce.Models.Pdh
+@{
+    ViewBag.Title = "Pdh";
+    var mensaje = (ViewBag.Mensaje == null) ? string.Empty : ViewBag.Mensaje;
+
+}
+
+@section css
+{
+    <link href="~/Content/visitas.css" rel="stylesheet" />
+}
+
+@Html.Hidden("mensaje",(object)mensaje)
+
+<div class="container">
+    <form action="~/Visitas/Pdh" method="post">
+        <h2>PDH CATALOGO</h2>
+
+        <div class="section">
+            <div class="input-field col s12">
+               @Html.TextBoxFor(x => x.StrNombre,new {@class="validate" } )
+               @Html.LabelFor(x => x.StrNombre )
+               @Html.ValidationMessageFor( x => x.StrNombre )
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="input-field col s12">
+               @Html.TextBoxFor(x => x.StrTelefono,new {@class="validate" } )
+               @Html.LabelFor(x => x.StrTelefono )
+               @Html.ValidationMessageFor(x => x.StrTelefono )
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="input-field col s12">
+               
+                @Html.TextBoxFor(x => x.StrObservacion,new {@class="validate" } )
+                @Html.LabelFor(x => x.StrObservacion )
+                @Html.ValidationMessageFor(x => x.StrObservacion )
+
+            </div>
+        </div>
+
+        <br/>
+
+        <button type="submit" class="btn-add btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></button>
+
+    </form>
+
+</div>
+
+
+@section scripts
+    {
+       <script src="~/Scripts/Visitas.js"></script>
+    }

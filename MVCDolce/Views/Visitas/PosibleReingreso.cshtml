@@ -1,0 +1,61 @@
+﻿@model MVCDolce.Models.PosiblesReingresos
+@{
+    ViewBag.Title = "Posible Reingreso";
+
+    var mensaje = (ViewBag.mensaje == null) ? string.Empty : ViewBag.mensaje;
+    var error = (ViewBag.Error == null) ? string.Empty : ViewBag.Error;
+}
+
+@Html.Hidden("mensaje", (object)mensaje)
+@Html.Hidden("Mensaje_error", (object)error)
+
+<div class="container">
+    <form action="~/Visitas/PosibleReingreso" method="post">
+        <h2>Posible Reingreso</h2>
+        <div class="section">
+            <div class="section">
+                <div class="input-field col s12 push-s2">
+                    <input type="text" id="txt-cedula" class="validate" value="@ViewBag.cedula" readonly="readonly" name="StrDocumento" />
+                    <label for="txt-cedula">Documento No</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section">
+                <div class="input-field col s12 push-s2">
+                    <input type="text" id="txt-nombre" class="validate" value="@ViewBag.nombre" readonly="readonly" name="StrNombre" />
+                    <label for="txt-nombre">Nombre de la Asesora</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section">
+                <div class="input-field col s12 push-s2">
+                    <input type="text" id="txt-ultimacampaña" class="validate" value="@ViewBag.campana" readonly="readonly" name="StrUltimaCampaña" />
+                    <label for="txt-ultimacampaña">Ultima campaña</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section">
+                <div class="input-field col s12 push-s2">
+                    <input type="text" id="txt-observacion" class="validate" name="StrObservacion" />
+                    <label for="txt-observacion">Observacion</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <button id="btn-addvisita" type="submit" class="btn-floating btn-large waves-effect waves-light red btn-add"><i class="material-icons">add</i></button>
+        </div>
+
+    </form>
+</div>
+
+@section scripts
+    {
+        <script src="~/Scripts/Visitas.js"></script>
+    }

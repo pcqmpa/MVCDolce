@@ -1,0 +1,90 @@
+﻿@{ 
+    var usuario = (Session["Usuario"].ToString() == null) ? string.Empty : Session["Usuario"].ToString();
+
+    var logDivisional = (Session["LogDivisional"].ToString() == null) ? "0" : Session["LogDivisional"].ToString();
+
+    var menuVisitas = (logDivisional == "0") ? "Index" : "MenuDivisional";
+}
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/Sitio.css" rel="stylesheet" />
+    <link href="~/Content/materialize.min.css" rel="stylesheet" />
+    <link rel="icon" type="image/png" sizes="96x96" href="~/favicon-96x96.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="~/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="~/favicon-16x16.png" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+    @RenderSection("css", required: false)
+</head>
+<body>
+
+    @if (usuario != "")
+    {
+        <nav class="nav-dolce">
+            <ul class="right hide-on-med-and-down">
+                <li><a href="#!">Prospecta</a></li>
+                <li><a href="#!">Puntos</a></li>
+                <li><a href="#!">Cartera</a></li>
+                <li><a href="~/Visitas/@menuVisitas">Visitas</a></li>
+                <li><a href="~/Seguridad/CambioPassword">Cambio de Password</a></li>
+                <li><a href="~/Visitas/ListadoVisitas">Informe de Visitas</a></li>
+            </ul>
+            <ul id="slide-out" class="side-nav">
+                <li><a href="#!">Prospecta</a></li>
+                <li><a href="#!">Puntos</a></li>
+                <li><a href="#!">Cartera</a></li>
+                <li><a href="~/Visitas/@menuVisitas">Visitas</a></li>
+                <li><a href="~/Seguridad/CambioPassword">Cambio de Password</a></li>
+                <li><a href="~/Visitas/ListadoVisitas">Informe de Visitas</a></li>
+            </ul>
+            <a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+            <img src="~/images/LogoD.png" width="50" height="60" style="margin-right:10px;float:right" />  
+        </nav>
+    }
+    else
+    {
+       <nav class="nav-dolce">
+            
+          <img src="~/images/LogoD.png" width="50" height="60" style="margin-left:10px;" />       
+          
+       </nav>
+    }
+
+
+    <section class="main">
+         @RenderBody()
+    </section> 
+    <br />
+    <br />
+    <footer class="page-footer blue-grey darken-4">
+        <div class="container">
+            <div class="row">
+                <div class="col s12 l12 center-align">
+                    &copy; Dolce @DateTime.Now.Year
+                </div>
+            </div>
+            
+        </div>
+    </footer>
+
+
+    @Scripts.Render("~/bundles/jquery")
+    <script src="~/Scripts/vue.min.js"></script>
+    <script src="~/Scripts/materialize/materialize.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.button-collapse').sideNav({
+                menuWidth: 240, // Default is 240
+                edge: 'left', // Choose the horizontal origin
+                closeOnClick: true // Closes side-nav on <a> clicks, useful for Angular/Meteor
+            });
+        });
+    </script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

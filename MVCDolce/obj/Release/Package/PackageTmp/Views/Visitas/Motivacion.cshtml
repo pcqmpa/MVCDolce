@@ -1,0 +1,96 @@
+﻿@model MVCDolce.Models.Motivacion
+@{
+    ViewBag.Title = "Motivacion";
+
+    var mensaje = (ViewBag.mensaje == null) ? string.Empty : ViewBag.mensaje;
+    var error = (ViewBag.Error == null) ? string.Empty : ViewBag.Error;
+}
+
+@Html.Hidden("mensaje", (object)mensaje)
+@Html.Hidden("Mensaje_error", (object)error)
+
+@Html.Hidden("urlConsulta", Url.Action("ConsultaAsesoraMotivacion","Visitas"))
+
+<div class="container">
+    <form action="~/Visitas/Motivacion" method="post">
+        <h2>Motivación</h2>
+        <div class="section">
+            <div class="input-field col s12">
+                <input id="txt-cedula" type="text" class="validate" name="StrDocumento" value="@ViewBag.cedula" />
+                <label for="txt-cedula">Documento No</label>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="input-field col s12">
+
+                @Html.TextBoxFor( x => x.StrNombre, new { @readonly="readonly",@Value = "Nombre Asesora"})
+                <label for="txt-nombre">Nombre de la asesora</label>
+
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="input-field col s12">
+                <input id="txt-puntos" type="text" readonly="readonly"  name="NumPuntos" value="0"/>
+                <label for="txt-puntos">Puntos Acumulados</label>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="input-field col s12">
+                <input id="txt-ultimacampana" type="text" readonly="readonly" name="StrUltimaCampaña" value="00000" />
+                <label for="txt-ultimacampana">Ultima Campaña</label>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="input-field col s12">
+                <input id="txt-observacion" type="text" class="validate" name="StrObservacion" />
+                <label for="txt-observacion">Observacion</label>
+            </div>
+        </div>
+
+        <div class="section">
+            <button id="btn-addvisita" type="submit" class="btn-add btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></button>
+        </div>
+
+
+    </form>
+</div>
+
+@section scripts
+    {
+        
+        <script src="~/Scripts/Visitas.js"></script>
+        <script type="text/javascript">
+
+            $(function () {
+
+                var url = $("#urlConsulta").val();
+                var documento = $("#txt-cedula").val();
+
+                $.ajax({
+                    url: url,
+                    data: { strDocumento: documento },
+                    type: "POST"
+                }).done(function (res) {
+
+                    if (res.Error != undefined) {
+                        Materialize.toast(res.Error, 4000);
+                    }
+                    else {
+                        $("#txt-puntos").val(res.datos.NumPuntos);
+                        $("#StrNombre").val(res.datos.StrNombre);
+                        $("#txt-ultimacampana").val(res.datos.StrUltimaCampaña);
+                    }
+
+
+                }).fail(function (error) {
+                    alert(error.error);
+                });
+
+            });
+
+        </script>
+    }

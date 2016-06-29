@@ -1,0 +1,73 @@
+﻿@model MVCDolce.Models.Seguridad
+@{
+    ViewBag.Title = "Visitas Dolce";
+    var mensaje = (ViewBag.mensaje == null) ? string.Empty : ViewBag.mensaje;
+    var error = (ViewBag.Error == null) ? string.Empty : ViewBag.Error;
+}
+
+@Html.Hidden("mensaje", (object)mensaje)
+@Html.Hidden("Mensaje_error", (object)error)
+
+<div class="container">
+
+    <div class="row">
+
+        <div class="ingreso-dolce">
+
+            <form class="form-login" action="~/Seguridad/Index" method="post">
+                <h2>Login</h2>
+                @*<div class="section">
+                    <a href="#" class="btn btn-fb hide-on-small-only">Iniciar con Facebook</a>
+                    <a href="#" class="btn btn-fb hide-on-med-and-up">Facebook</a>
+                </div>*@
+                <div class="divider"></div>
+
+                <div class="section">
+                    <div class="input-field col s12">
+                        @Html.TextBoxFor(x => x.StrEmail,new {@class="validate"} )
+                        @Html.LabelFor(x => x.StrEmail )
+                        @Html.ValidationMessageFor(x => x.StrEmail )
+                    </div>
+                    <div class="input-field col s12">
+                        
+                        @Html.PasswordFor(x => x.StrPassword,new {@class="validate" } )
+                        @Html.LabelFor(x => x.StrPassword )
+                        @Html.ValidationMessageFor(x => x.StrPassword)
+
+                    </div>
+                    
+                    <input type="checkbox" id="test5" />
+                    <label for="test5">Recordar Cuenta</label><br/>
+                    <button  id="btn-ingreso" class="btn waves-effect waves-light center-align" type="submit" name="action">
+                        Ingresar
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col s6">
+            <a href="~/Seguridad/Registro">Resgistrate</a>
+        </div>
+        
+        <div class="col s6">
+            <a href="~/Seguridad/RecuperarPassword">¿Olvidaste tu contraseña?</a>
+        </div>
+
+    </div>
+
+
+</div>
+
+@section scripts
+{
+    <script src="~/Scripts/Seguridad.js"></script>
+}

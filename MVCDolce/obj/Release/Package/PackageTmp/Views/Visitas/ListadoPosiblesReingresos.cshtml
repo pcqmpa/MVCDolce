@@ -1,0 +1,53 @@
+﻿@model MVCDolce.Models.PosiblesReingresos
+@{
+    ViewBag.Title = "Listado de Posibles Reingresos";
+
+    var xlista = ViewData["ListaPosibles"] as List<MVCDolce.Models.PosiblesReingresos>;
+
+    var total = (xlista == null) ? 0 : xlista.Count;
+
+    var mensaje = (ViewBag.mensaje == null) ? string.Empty : ViewBag.mensaje;
+    var error = (ViewBag.Error == null) ? string.Empty : ViewBag.Error;
+}
+
+@Html.Hidden("mensaje", (object)mensaje)
+@Html.Hidden("Mensaje_error", (object)error)
+
+<div class="container">
+    <table class="striped">
+        <thead>
+            <tr>
+                <th data-field="avatar">Avatar</th>
+                <th data-field="id">Documento</th>
+                <th data-field="name">Nombre de la Asesora</th>
+                <th data-field="telefono">Telefono</th>
+                <th data-field="campana">Ultima Campaña</th>
+                <th data-field="price">Seleccionar</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+
+            @if (xlista != null)
+            {
+                foreach (var item in xlista)
+                {
+                    <tr>
+                        <td style="text-align:center"><i class="material-icons">account_circle</i></td>
+                        <td>@item.StrDocumento</td>
+                        <td>@item.StrNombre</td>
+                        <td>@item.StrUltimaCampaña</td>
+                        <td>@item.StrTelefono</td>
+                        <td style="text-align:center"><a href="~/Visitas/PosibleReingreso?strCedula=@item.StrDocumento&strNombre=@item.StrNombre&campana=@item.StrUltimaCampaña"><i class="material-icons">grade</i></a></td>
+                    </tr>
+                }
+            }
+
+        </tbody>
+    </table>
+
+    <div class="section">
+        <h3>Total de Asesoras <span>@total</span></h3>
+    </div>
+</div>

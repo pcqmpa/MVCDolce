@@ -1,0 +1,99 @@
+﻿body {
+}
+
+
+.ul-visitas {
+    padding:0;
+    margin:0;
+}
+
+.ul-visitas-li {
+
+    height:50px;
+    width:100%;
+    font-size:20px;
+    background-color:#d7d7d7;
+    color:#2c3e50;
+}
+
+    .ul-visitas-li a i {
+        float:right;
+        margin-top:20px;
+        margin-right:5px;
+    }
+
+
+    .ul-visitas-li a {
+        line-height:3;
+        margin-left:10px;
+        color:#2c3e50;
+        width:100%;
+    }
+    
+.header-list {
+    background-color:#fff;
+    color:#999;
+    font-size:30px;
+    height:80px;
+    line-height:2;
+    margin-left:5px;
+}
+
+.ul-visitas-divider {
+    margin:0;
+    padding:0;
+    border-top: 1px solid #DED5D5;
+    border-bottom: 1px solid #A2A2A2;
+}
+
+.btn-add{
+
+    float:right;
+}
+
+.totales-visitas {
+    margin-top:50px;
+    margin:0;
+    padding:0;
+}
+
+.li-totales-visitas {
+    width: 100%;
+    height: 50px;
+    background-color: #2C3E50;
+    line-height: 3;
+    padding-left: 5px;
+    font-size: 18px;
+    color: #fff;
+    position:relative;
+}
+
+    .li-totales-visitas span {
+        position:absolute;
+        right:30px;
+
+    }
+
+.ul-menu-divisional {
+    padding:0;
+    margin:10px 0;
+}
+
+.ul-menu-divisional-li {
+    height: 50px;
+    width: 100%;
+    background-color: #2C3E50;
+    line-height: 2.5;
+}
+
+    .ul-menu-divisional-li a {
+        margin-left: 10px;
+        font-size: 18px;
+        color: #fff;
+    }
+
+        .ul-menu-divisional-li a i {
+            float: right;
+            margin-right: 10px;
+            margin-top: 10px;
+        }

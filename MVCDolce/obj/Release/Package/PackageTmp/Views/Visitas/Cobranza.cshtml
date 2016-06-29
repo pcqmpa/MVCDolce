@@ -1,0 +1,59 @@
+﻿@model MVCDolce.Models.ListaCobranza
+@{
+    ViewBag.Title = "Cobranza";
+
+    var mensaje = (ViewBag.mensaje == null) ? string.Empty : ViewBag.mensaje;
+    var error = (ViewBag.Error == null) ? string.Empty : ViewBag.Error;
+}
+
+@Html.Hidden("mensaje", (object)mensaje)
+@Html.Hidden("Mensaje_error", (object)error)
+
+<div class="container">
+    <form action="~/Visitas/Cobranza" method="post">
+        <h2>Cobranza</h2>
+        
+        <div class="section">
+            <div class="input-field col s12 push-s2">
+                <input type="text" id="txt-cedula" class="validate" readonly="readonly" value="@ViewBag.cedula" name="StrDocumento" />
+                <label for="txt-cedula">Documento No</label>
+            </div>
+        </div>
+        <div class="section">
+            <input type="text" id="txt-nombre" value="@ViewBag.nombre" readonly="readonly" name="StrNombre"/>
+            <label for="txt-nombre">Nombre de la asesora</label>
+        </div>
+
+        <div class="section">
+            <input type="text" id="txt-saldo" value="@string.Format("{0:c0}",ViewBag.saldo)" readonly="readonly" name="CurSaldo"/>
+            <label for="txt-saldo">Saldo pendiente</label>
+        </div>
+
+        <div class="section">
+            <input type="text" id="txt-puntos" value="@ViewBag.puntos" readonly="readonly" name="NumPuntos" />
+            <label for="txt-puntos">Puntos acumulados</label>
+        </div>
+
+        <div class="section">
+            <input type="text" id="txt-ultimacampana" value="@ViewBag.campana" readonly="readonly"  name="StrCampaña"/>
+            <label for="txt-ultimacampana">Ultima campaña</label>
+        </div>
+
+        <div class="section">
+            <div class="input-field col s12 push-s2">
+                <input type="text" id="txt-observacion" class="validate" name="StrObservacion" />
+                <label for="txt-observacion">Observacion</label>
+            </div>
+        </div>
+
+        <div class="section">
+            <button id="btn-addvisita" type="submit" class="btn-floating btn-large waves-effect waves-light red btn-add"><i class="material-icons">add</i></button>
+        </div>
+
+    </form>
+</div>
+
+@section scripts
+    {
+        <script src="~/Scripts/Visitas.js"></script>
+    }

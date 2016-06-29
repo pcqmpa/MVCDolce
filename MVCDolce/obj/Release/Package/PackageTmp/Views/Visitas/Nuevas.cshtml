@@ -1,0 +1,69 @@
+﻿@model MVCDolce.Models.Nuevas
+@{
+    ViewBag.Title = "Nuevas";
+    var cedula = (ViewBag.cedula == null) ? string.Empty : ViewBag.cedula;
+    var nombre = (ViewBag.nombre == null) ? string.Empty : ViewBag.nombre;
+    var valor = (ViewBag.valor == null) ? string.Empty : ViewBag.valor;
+    var puntos = (ViewBag.puntos == null) ? string.Empty : ViewBag.puntos;
+
+    var mensaje = (ViewBag.mensaje == null) ? string.Empty : ViewBag.mensaje;
+    var error = (ViewBag.Error == null) ? string.Empty : ViewBag.Error;
+}
+
+@Html.Hidden("mensaje", (object)mensaje)
+@Html.Hidden("Mensaje_error", (object)error)
+
+<div class="container">
+    <form action="~/Visitas/Nuevas" method="post">
+        <h2>Nuevas</h2>
+        <div class="section">
+            <div class="input-field col s12 push-s2">
+
+                @Html.TextBoxFor( x => x.StrDocumento,new { @Value = cedula, @readonly = "readonly" })
+                @Html.LabelFor( x => x.StrDocumento )
+
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="input-field col s12 push-s2">
+               @Html.TextBoxFor( x => x.StrNombre,new { @Value = nombre, @readonly = "readonly" } )
+               @Html.LabelFor( x => x.StrNombre )
+            </div>
+         </div>
+
+        <div class="section">
+            <div class="input-field col s12 push-s2">
+                <input type="text" id="txt-valorPedido" value="@valor" disabled />
+                <label for="txt-valorPedido">Valor del Pedido</label>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="input-field col s12 push-s2">
+                <input type="text" id="txt-puntos" value="@puntos" disabled />
+                <label for="txt-puntos">Puntos Acumulados</label>
+            </div>
+        </div>
+
+
+        <div class="section">
+            <div class="input-field col s12 push-s2">
+               @Html.TextBoxFor( x => x.StrObservacion )
+               @Html.LabelFor( x => x.StrObservacion )
+            </div>
+        </div>
+
+        <div class="section">
+            <button id="btn-addvisita" type="submit" class="btn-floating btn-large waves-effect waves-light red btn-add"><i class="material-icons">add</i></button>
+        </div>
+
+
+    </form>
+</div>
+
+@section scripts
+    {
+        
+        <script src="~/Scripts/Visitas.js"></script>
+    }

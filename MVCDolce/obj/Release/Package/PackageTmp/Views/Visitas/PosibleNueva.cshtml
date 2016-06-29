@@ -1,0 +1,97 @@
+﻿@model MVCDolce.Models.PosibleNueva
+@{
+    ViewBag.Title = "Posible Nueva";
+    var mensaje = (ViewBag.mensaje == null) ? string.Empty : ViewBag.mensaje;
+    var error = (ViewBag.Error == null) ? string.Empty : ViewBag.Error;
+}
+
+@section css 
+    {  
+        <link href="~/Content/visitas.css" rel="stylesheet" />
+    }
+
+
+@Html.Hidden("mensaje", (object)mensaje)
+@Html.Hidden("Mensaje_error", (object)error)
+
+<div class="container">
+    <form action="~/Visitas/PosibleNueva" method="post">
+        <h2>Posible Nueva</h2>
+        <div class="section">
+            <div class="input-field col s12 push-s2">
+                @Html.TextBoxFor(x => x.StrDocumento,new {@class="validate" } )
+                @Html.LabelFor(x => x.StrDocumento )
+                @Html.ValidationMessageFor(x => x.StrDocumento )
+            </div>
+        </div>
+        <div class="section">
+            <div class="input-field col s12 push-s2">
+                @Html.TextBoxFor(x => x.StrNombres, new { @class = "validate" })
+                @Html.LabelFor(x => x.StrNombres)
+                @Html.ValidationMessageFor(x => x.StrNombres)
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="input-field col s12 push-s2">
+                @Html.TextBoxFor(x => x.StrApellidos, new { @class = "validate" })
+                @Html.LabelFor(x => x.StrApellidos)
+                @Html.ValidationMessageFor(x => x.StrApellidos)
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="input-field col s12 push-s2">
+                @Html.TextBoxFor(x => x.StrDireccion, new { @class = "validate" })
+                @Html.LabelFor(x => x.StrDireccion)
+                @Html.ValidationMessageFor(x => x.StrDireccion)
+            </div>
+        </div>
+        <div class="section">
+            <div class="input-field col s12 push-s2">
+                @Html.TextBoxFor(x => x.StrTelefono, new { @class = "validate" })
+                @Html.LabelFor(x => x.StrTelefono)
+                @Html.ValidationMessageFor(x => x.StrTelefono)
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="input-field col s12 push-s2">
+                @Html.TextBoxFor(x => x.StrCelular, new { @class = "validate" })
+                @Html.LabelFor(x => x.StrCelular)
+                @Html.ValidationMessageFor(x => x.StrCelular)
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="input-field col s12 push-s2">
+                @Html.TextBoxFor(x => x.StrDepartamento, new { @class = "validate" })
+                @Html.LabelFor(x => x.StrDepartamento)
+                @Html.ValidationMessageFor(x => x.StrDepartamento)
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="input-field col s12 push-s2">
+                @Html.TextBoxFor(x => x.StrCiudad, new { @class = "validate" })
+                @Html.LabelFor(x => x.StrCiudad)
+                @Html.ValidationMessageFor(x => x.StrCiudad)
+            </div>
+        </div>
+        <div class="section">
+            <div class="input-field col s12 push-s2">
+                @Html.TextBoxFor(x => x.StrBarrio, new { @class = "validate" })
+                @Html.LabelFor(x => x.StrBarrio)
+                @Html.ValidationMessageFor(x => x.StrBarrio)
+            </div>
+        </div>
+
+
+        <button type="submit" title="Guardar" id="btn-addPosibleNueva" class="btn-add btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></button>
+    </form>
+</div>
+
+@section scripts
+    {       
+        <script src="~/Scripts/Visitas.js"></script>
+    }

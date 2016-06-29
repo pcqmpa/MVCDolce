@@ -1,0 +1,59 @@
+﻿body {
+    display:flex;
+    min-height:100vh;
+    flex-direction:column;
+    font-family: 'Montserrat';
+}
+
+header {
+    height:50px;
+    width:100%;
+    background-color:#ff01f2;
+}
+
+
+footer {
+
+    color:#fff;
+
+}
+
+h2 {
+    font-size: 30px;
+    color: #999;
+}
+
+.main {
+    flex:1 0 auto;
+}
+
+.form-login {
+
+}
+
+.form-login h2 {
+    font-size:25px;
+    color: #2C3E50;
+}
+
+.nav-dolce {
+    background-color:#2c3e50
+}
+
+.btn.btn-fb {
+    background-color:#3b66dc;
+}
+
+    .btn.btn-fb:hover {
+        background-color:#24376c;
+    }
+
+#btn-ingreso {
+    margin-top:20px;
+    background-color:#2c3e50
+}
+
+#logo-dolce img {
+
+    max-width:10%;
+}

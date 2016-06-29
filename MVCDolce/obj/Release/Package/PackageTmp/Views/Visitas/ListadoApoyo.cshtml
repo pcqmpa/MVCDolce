@@ -1,0 +1,45 @@
+﻿@model MVCDolce.Models.ListaVisitaApoyo
+@{
+    ViewBag.Title = "Listado de Apoyo";
+
+    var listado = ViewData["ListaApoyo"] as List<MVCDolce.Models.ListaVisitaApoyo>;
+
+    var total = (listado == null) ? 0 : listado.Count();
+}
+
+<div class="container">
+    <table  class="striped">
+        <thead>
+            <tr>
+                <th data-field="avatar">Avatar</th>
+                <th data-field="id">Documento</th>
+                <th data-field="name">Nombre de la Asesora</th>
+                <th data-field="price">Seleccionar</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @if (listado != null)
+            {
+
+                foreach (var item in listado)
+                {
+                    <tr>
+                        <td style="text-align:center"><i class="material-icons">account_circle</i></td>
+                        <td>@item.StrDocumento</td>
+                        <td>@item.StrNombre</td>
+                        <td style="text-align:center"><a href="~/Visitas/Apoyo?strCedula=@item.StrDocumento&strNombre=@item.StrNombre"><i class="material-icons">grade</i></a></td>
+                    </tr>
+                }
+
+
+            }
+
+        </tbody>
+    </table>
+
+    <div class="section">
+        <h3>Total de Asesoras <span>@total</span></h3>
+    </div>
+</div>
+

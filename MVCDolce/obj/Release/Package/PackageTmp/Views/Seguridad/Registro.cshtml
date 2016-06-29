@@ -1,0 +1,78 @@
+﻿@model MVCDolce.Models.Registro
+@{
+    ViewBag.Title = "Registro";
+
+    var menError = (ViewBag.Error == null) ? string.Empty : ViewBag.Error;
+    var mensaje = (ViewBag.mensaje == null) ? string.Empty : ViewBag.mensaje;
+
+}
+
+@Html.Hidden("Mensaje_error",(object)menError)
+@Html.Hidden("mensaje",(object)mensaje)
+
+<div class="container">
+
+    <form action="~/Seguridad/Registro" method="post">
+
+        <h2>Resgitro Visitas Dolce</h2>
+
+        <div class="section">
+            <div class="input-field col s12 push-s2">
+                @Html.TextBoxFor(x => x.StrEmail, new {@class="validate"})            
+                @Html.LabelFor(x => x.StrEmail)
+                @Html.ValidationMessageFor(x => x.StrEmail )
+                
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="input-field col s12 push-s2">
+                @Html.TextBoxFor(x => x.StrNombre,new {@class="validate" } )
+                @Html.LabelFor(x => x.StrNombre)
+                @Html.ValidationMessageFor(x => x.StrNombre)
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="input-field col s12 push-s2">
+
+                @Html.PasswordFor(x => x.StrPassword,new {@class="validate" } )
+                @Html.LabelFor(x => x.StrPassword )
+                @Html.ValidationMessageFor(x => x.StrPassword)
+
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="input-field col s12 push-s2">
+
+                @Html.PasswordFor(x => x.StrConfirmarPassword,new {@class="validate" } )
+                @Html.LabelFor(x => x.StrConfirmarPassword)
+                @Html.ValidationMessageFor(x => x.StrConfirmarPassword )
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="input-field col s12 push-s2">
+                
+                @Html.TextBoxFor(x => x.StrCedula,new {@class="validate" } )
+                @Html.LabelFor(x => x.StrCedula)
+                @Html.ValidationMessageFor( x => x.StrCedula )
+
+            </div>
+        </div>
+
+        <div class="section">
+            <button type="submit" class="btn-add btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></button>
+        </div> 
+
+    </form>
+
+
+</div>
+
+@section scripts
+    {
+        
+        <script src="~/Scripts/Seguridad.js"></script>
+    }
