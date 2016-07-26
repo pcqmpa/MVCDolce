@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
 
 namespace MVCDolce.Controllers
 {
@@ -229,7 +230,7 @@ namespace MVCDolce.Controllers
 
         }
 
-        public ActionResult ListadoCobranza()
+        public ActionResult ListadoCobranza(int? page, string consulta="")
         {
             var usuario = Session["Usuario"].ToString();
 
@@ -237,14 +238,57 @@ namespace MVCDolce.Controllers
 
             var xlista = vc.ListadoCobranza(usuario, out _strMensaje);
 
-            if (xlista != null)
+
+            if (consulta != "")
             {
-                ViewData["ListaCobranza"] = xlista;
+                if (xlista != null)
+                {
+                    var xfiltro = xlista.Where(x => x.StrDocumento.Contains(consulta)).ToList();
+
+                    if (xfiltro.Count > 0)
+                    {
+
+                        var pageNumber = page ?? 1;
+                        var cobranza = xfiltro.ToPagedList(pageNumber, 10);
+
+                        ViewBag.cobranza = cobranza;
+                        ViewBag.conteo = xfiltro.Count;
+
+                    }
+                    else
+                    {
+                        var pageNumber = page ?? 1;
+                        var cobranza = xlista.ToPagedList(pageNumber, 10);
+
+
+                        ViewBag.cobranza = cobranza;
+                        ViewBag.conteo = xlista.Count;
+
+                    }
+                }
+                else
+                {
+                    ViewBag.Error = _strMensaje;
+                }
             }
             else
             {
-                ViewBag.Error = _strMensaje;
+                if (xlista != null)
+                {
+                    var pageNumber = page ?? 1;
+
+                    var cobranza = xlista.ToPagedList(pageNumber, 10);
+
+                    ViewBag.cobranza = cobranza;
+                    ViewBag.conteo = xlista.Count;
+                }
+                else
+                {
+                    ViewBag.Error = _strMensaje;
+                }
             }
+
+
 
             return View();
 
@@ -297,7 +341,7 @@ namespace MVCDolce.Controllers
 
         }
 
-        public ActionResult ListaMotivacion()
+        public ActionResult ListaMotivacion(int? page,string consulta="")
         {
 
             var usuario = Session["Usuario"].ToString();
@@ -306,18 +350,56 @@ namespace MVCDolce.Controllers
 
             var datos = vc.ListadoMotivacion(usuario, out _strMensaje);
 
-            if (datos != null)
+            if (consulta != "")
             {
-                ViewData["ListaMotivacion"] = datos;
-                return View();
+                if (datos != null)
+                {
+                    var xfiltro = datos.Where(x => x.StrDocumento.Contains(consulta)).ToList();
+
+                    if (xfiltro.Count > 0)
+                    {
+                        var pageNumber = page ?? 1;
+                        var motivacion = xfiltro.ToPagedList(pageNumber, 10);
+
+                        ViewBag.motivacion = motivacion;
+                        ViewBag.conteo = xfiltro.Count;
+                    }
+                    else
+                    {
+                        var pageNumber = page ?? 1;
+                        var motivacion = datos.ToPagedList(pageNumber, 10);
+
+                        ViewBag.motivacion = motivacion;
+                        ViewBag.conteo = datos.Count;
+                    }
+
+                }
+                else
+                {
+                    ViewBag.Error = _strMensaje;
+                }
             }
             else
             {
-                ViewBag.Error = _strMensaje;
-                return View();
+                if (datos != null)
+                {
+                    var pageNumber = page ?? 1;
+                    var motivacion = datos.ToPagedList(pageNumber, 10);
+
+                    ViewBag.motivacion = motivacion;
+                    ViewBag.conteo = datos.Count;
+
+                }
+                else
+                {
+                    ViewBag.Error = _strMensaje;
+                   
+                }
             }
 
-            
+
+            return View();
+
         }
 
         public ActionResult Motivacion(string cedula)
@@ -384,7 +466,7 @@ namespace MVCDolce.Controllers
         }
 
 
-        public ActionResult ListadoPosiblesReingresos(string consulta="")
+        public ActionResult ListadoPosiblesReingresos(int? page,string consulta="")
         {
 
 
@@ -393,6 +475,7 @@ namespace MVCDolce.Controllers
             var usuario = Session["Usuario"].ToString();
             var xlista = vc.ListaPosiblesReingresos(usuario, out _strMensaje);
 
+            var listSaldo = xlista.Where(x => x.CurSaldo == 0).ToList();
 
             if (consulta != "")
             {
@@ -400,13 +483,26 @@ namespace MVCDolce.Controllers
 
                 if (xfiltro.Count > 0)
                 {
-                    ViewData["ListaPosibles"] = xfiltro;
+
+                    var pageNumber = page ?? 1;
+                    var reingresos = xfiltro.ToPagedList(pageNumber, 10);
+
+                    ViewBag.reingresos = reingresos;
+                    ViewBag.conteo = xfiltro.Count;
+
+                    
                 }
                 else
                 {
                     if (xlista != null)
                     {
-                        ViewData["ListaPosibles"] = xlista;
+
+                   
+                        var pageNumber = page ?? 1;
+                        var reingresos = listSaldo.ToPagedList(pageNumber, 10);
+
+                        ViewBag.reingresos = reingresos;
+                        ViewBag.conteo = listSaldo.Count;
 
                     }
                     else
@@ -419,7 +515,13 @@ namespace MVCDolce.Controllers
             {
                 if (xlista != null)
                 {
-                    ViewData["ListaPosibles"] = xlista;
+
+                  
+                    var pageNumber = page ?? 1;
+                    var reingresos = listSaldo.ToPagedList(pageNumber, 10);
+
+                    ViewBag.reingresos = reingresos;
+                    ViewBag.conteo = listSaldo.Count;
 
                 }
                 else
@@ -434,6 +536,73 @@ namespace MVCDolce.Controllers
             return View();
         }
 
+
+        public ActionResult ListadoPosiblesReingresosConSaldo(int? page,string consulta="")
+        {
+
+            var vc = new Clases.VisitasDao();
+
+            var usuario = Session["Usuario"].ToString();
+            var xlista = vc.ListaPosiblesReingresos(usuario, out _strMensaje);
+
+            var listSaldo = xlista.Where(x => x.CurSaldo >= 10000).ToList();
+
+            if (consulta != "")
+            {
+
+
+                var xfiltro = listSaldo.Where(x => x.StrDocumento.Contains(consulta)).ToList();
+
+                if (xfiltro.Count > 0)
+                {
+
+                    var pageNumber = page ?? 1;
+                    var reingresos = xfiltro.ToPagedList(pageNumber, 10);
+
+                    ViewBag.reingresos = reingresos;
+                    ViewBag.conteo = xfiltro.Count;
+
+
+                }
+                else
+                {
+                    if (xlista != null)
+                    {
+
+                        var pageNumber = page ?? 1;
+                        var reingresos = listSaldo.ToPagedList(pageNumber, 10);
+
+                        ViewBag.reingresos = reingresos;
+                        ViewBag.conteo = listSaldo.Count;
+
+                    }
+                    else
+                    {
+                        ViewBag.Error = _strMensaje;
+                    }
+                }
+            }
+            else
+            {
+                if (xlista != null)
+                {
+                    var pageNumber = page ?? 1;
+                    var reingresos = listSaldo.ToPagedList(pageNumber, 10);
+
+                    ViewBag.reingresos = reingresos;
+                    ViewBag.conteo = listSaldo.Count;
+
+                }
+                else
+                {
+                    ViewBag.Error = _strMensaje;
+                }
+            }
+
+
+
+            return View();
+        }
         public ActionResult PosibleReingreso(string strCedula,string strNombre,string campana)
         {
 

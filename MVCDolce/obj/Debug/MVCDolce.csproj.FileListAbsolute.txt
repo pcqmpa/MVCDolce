@@ -58,3 +58,7 @@ F:\Dolce2016\MVCDolce\MVCDolce\bin\es\System.Web.WebPages.Razor.resources.dll
 F:\Dolce2016\MVCDolce\MVCDolce\obj\Debug\MVCDolce.csprojResolveAssemblyReference.cache
 F:\Dolce2016\MVCDolce\MVCDolce\obj\Debug\MVCDolce.dll
 F:\Dolce2016\MVCDolce\MVCDolce\obj\Debug\MVCDolce.pdb
+F:\Dolce2016\MVCDolce\MVCDolce\bin\PagedList.dll
+F:\Dolce2016\MVCDolce\MVCDolce\bin\PagedList.Mvc.dll
+F:\Dolce2016\MVCDolce\MVCDolce\bin\PagedList.xml
+F:\Dolce2016\MVCDolce\MVCDolce\bin\PagedList.Mvc.xml

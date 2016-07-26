@@ -620,7 +620,8 @@ namespace MVCDolce.Clases
                                 StrDocumento = dt.Rows[i]["Cedula"].ToString(),
                                 StrNombre = dt.Rows[i]["NombreAsesora"].ToString(),
                                 StrUltimaCampaña = dt.Rows[i]["UltimaCampaña"].ToString(),
-                                StrTelefono=dt.Rows[i]["Telefono"].ToString()
+                                StrTelefono=dt.Rows[i]["Telefono"].ToString(),
+                                CurSaldo=Convert.ToDouble(dt.Rows[i]["Saldo"])
                             });
                             
                         }

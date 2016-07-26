@@ -178,6 +178,9 @@ namespace MVCDolce.Models
         public string StrUltimaCampaña { get; set; }
         public string StrObservacion { get; set; }
 
+        public double CurSaldo { get; set; }
+
+
     }
 
     public class InformeVisitas

@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "Listado de Cobranza";
 
-    var xlista = ViewData["ListaCobranza"] as List<MVCDolce.Models.ListaCobranza>;
+    var xlista = ViewBag.cobranza as List<MVCDolce.Models.ListaCobranza>;
     var total = (xlista == null) ? 0 : xlista.Count;
 
     var mensaje = (ViewBag.mensaje == null) ? string.Empty : ViewBag.mensaje;
@@ -10,10 +10,27 @@
 
 }
 
+@using PagedList.Mvc;
+@using PagedList;
+
 @Html.Hidden("mensaje", (object)mensaje)
 @Html.Hidden("Mensaje_error", (object)error)
+@Html.Hidden("urlConsulta",Url.Action("ListadoCobranza","Visitas"))
+
 
 <div class="container">
+
+    <div class="div-search row">
+        <h3>Consulta</h3>
+        <div class="div-search-input input-field col m6 s10">
+            <input type="text" id="txt-consulta" />
+            <label for="txt-consulta">Documento</label>
+        </div>
+        <div class="div-search-buttom col m1 s1">
+            <a class="btn-floating btn-large waves-effect waves-light red" onclick="buscar()"><i class="material-icons">search</i></a>
+        </div>
+    </div>
+
     <table class="striped">
         <thead>
             <tr>
@@ -30,9 +47,9 @@
         <tbody>
 
 
-            @if (xlista != null)
+            @if (ViewBag.cobranza != null)
             {
-                foreach (var item in xlista)
+                foreach (var item in ViewBag.cobranza)
                 {
                     <tr>
                         <td style="text-align:center"><i class="material-icons">account_circle</i></td>
@@ -50,11 +67,40 @@
     </table>
 
     <div class="section">
-        <h3>Total de Asesoras <span>@total</span></h3>
+        <h3>Total de Asesoras <span>@ViewBag.conteo</span></h3>
     </div>
+    @if (ViewBag.cobranza != null)
+    {
+        <div class="row">
+            <div class="col s12">
+                @Html.PagedListPager((IPagedList)ViewBag.cobranza, page => Url.Action("ListadoCobranza", new { page }))
+            </div>
+        </div>
+    }
+
+
 </div>
 
 @section scripts
     {
        <script src="~/Scripts/Visitas.js"></script>
+
+        <script type="text/javascript">
+            $(function () {
+            });
+
+            function buscar() {
+
+                var txtconsulta = $("#txt-consulta").val();
+
+                var url = $("#urlConsulta").val();
+                if (txtconsulta != "") {
+                    window.location.href = url + '?consulta=' + txtconsulta;
+                } else {
+                    window.location.href = url;
+                }
+
+            }
+
+        </script>
     }

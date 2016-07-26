@@ -16,14 +16,13 @@
 @Html.Hidden("mensaje", (object)mensaje)
 @Html.Hidden("Mensaje_error", (object)error)
 
-@Html.Hidden("urlconsulta",Url.Action("ListadoPosiblesReingresos", "Visitas"))
+@Html.Hidden("urlconsulta", Url.Action("ListadoPosiblesReingresosConSaldo", "Visitas"))
 
 <div class="container">
     <div class="div-search row">
         <h3>Consulta</h3>
         <div class="div-search-input input-field col m6 s10">
             <input type="text" id="txt-consulta" />
-            <input type="hidden" name="logFiltro" id="log_filtro" value="0"/>
             <label for="txt-consulta">Documento</label>
         </div>
         <div class="div-search-buttom col m1 s1">
@@ -56,7 +55,7 @@
                         <td>@item.StrNombre</td>
                         <td>@item.StrTelefono</td>
                         <td>@item.StrUltimaCampaña</td>
-                        <td>@string.Format("{0:c}",item.CurSaldo)</td>
+                        <td>@string.Format("{0:c}", item.CurSaldo)</td>
                         <td style="text-align:center"><a href="~/Visitas/PosibleReingreso?strCedula=@item.StrDocumento&strNombre=@item.StrNombre&campana=@item.StrUltimaCampaña"><i class="material-icons">grade</i></a></td>
                     </tr>
                 }
@@ -73,7 +72,7 @@
     {
         <div class="row">
             <div class="col s12">
-                @Html.PagedListPager((IPagedList)ViewBag.reingresos, page => Url.Action("ListadoPosiblesReingresos", new { page }))
+                @Html.PagedListPager((IPagedList)ViewBag.reingresos, page => Url.Action("ListadoPosiblesReingresosConSaldo", new { page }))
             </div>
         </div>
     }
@@ -81,7 +80,7 @@
 </div>
 @section scripts
     {
-        <script type="text/javascript">
+    <script type="text/javascript">
 
             var filtro = 0;
             $(function () {
@@ -110,5 +109,6 @@
                 window.location.href = url + '?filtro_saldo=' + filtro;
 
             }
-        </script>
-    }
+    </script>
+}
+
