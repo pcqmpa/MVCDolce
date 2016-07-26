@@ -13,7 +13,19 @@
 @Html.Hidden("mensaje", (object)mensaje)
 @Html.Hidden("Mensaje_error", (object)error)
 
+@Html.Hidden("urlconsulta",Url.Action("ListadoPosiblesReingresos", "Visitas"))
+
 <div class="container">
+    <div class="div-search row">
+        <h3>Consulta</h3>
+        <div class="div-search-input input-field col m6 s10">
+            <input type="text" id="txt-consulta" />
+            <label for="txt-consulta">Documento</label>
+        </div>
+        <div class="div-search-buttom col m1 s1">
+            <a class="btn-floating btn-large waves-effect waves-light red" onclick="buscar()"><i class="material-icons">search</i></a>
+        </div>
+    </div>
     <table class="striped">
         <thead>
             <tr>
@@ -51,3 +63,24 @@
         <h3>Total de Asesoras <span>@total</span></h3>
     </div>
 </div>
+@section scripts
+    {
+        <script type="text/javascript">
+            $(function () {
+            });
+
+            function buscar() {
+
+                var txtconsulta = $("#txt-consulta").val();
+
+                var url = $("#urlconsulta").val();
+                if (txtconsulta != "")
+                {
+                    window.location.href = url + '?consulta=' + txtconsulta;
+                } else {
+                    window.location.href = url;
+                }
+
+            }
+        </script>
+    }

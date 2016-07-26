@@ -384,23 +384,52 @@ namespace MVCDolce.Controllers
         }
 
 
-        public ActionResult ListadoPosiblesReingresos()
+        public ActionResult ListadoPosiblesReingresos(string consulta="")
         {
+
+
             var vc = new Clases.VisitasDao();
 
             var usuario = Session["Usuario"].ToString();
-
             var xlista = vc.ListaPosiblesReingresos(usuario, out _strMensaje);
 
-            if (xlista != null)
-            {
-                ViewData["ListaPosibles"] = xlista;
 
+            if (consulta != "")
+            {
+                var xfiltro = xlista.Where(x => x.StrDocumento.Contains(consulta)).ToList();
+
+                if (xfiltro.Count > 0)
+                {
+                    ViewData["ListaPosibles"] = xfiltro;
+                }
+                else
+                {
+                    if (xlista != null)
+                    {
+                        ViewData["ListaPosibles"] = xlista;
+
+                    }
+                    else
+                    {
+                        ViewBag.Error = _strMensaje;
+                    }
+                }
             }
             else
             {
-                ViewBag.Error = _strMensaje;
+                if (xlista != null)
+                {
+                    ViewData["ListaPosibles"] = xlista;
+
+                }
+                else
+                {
+                    ViewBag.Error = _strMensaje;
+                }
             }
+
+
+
 
             return View();
         }
